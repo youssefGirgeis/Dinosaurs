@@ -101,3 +101,11 @@ let pteranodon = new Dino(
 // Remove form from screen
 
 // On button click, prepare and display infographic
+
+document.querySelector("#btn").addEventListener("click", function () {
+  const human_name = document.getElementById("name").value;
+  const weight = document.getElementById("weight").value;
+  const feet = document.getElementById("feet").value;
+  const inches = document.getElementById("inches").value;
+  const diet = document.getElementById("diet").value;
+});
