@@ -54,7 +54,6 @@ p {
   box-sizing: border-box;
   width: 100%;
   border: 1px solid black;
-  height: 400px;
 }
 
 .grid-item:nth-child(1) {
