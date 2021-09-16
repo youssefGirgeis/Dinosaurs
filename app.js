@@ -81,6 +81,16 @@ let pteranodon = new Dino(
   "Actually a flying reptile, the Pteranodon is not a dinosaur"
 );
 
+const dinos = [
+  triceratops,
+  tyrannosaurusRex,
+  anklyosaurus,
+  brachiosaurus,
+  stegosaurus,
+  elasmosaurus,
+  pteranodon,
+];
+
 // Create Human Object
 
 function Human(name, feet, inches, weight, diet) {
@@ -120,6 +130,23 @@ Dino.prototype.compareDiet = function () {};
 // Generate Tiles for each Dino in Array
 
 // Add tiles to DOM
+const grid = document.getElementById("grid");
+
+dinos.forEach(function (dino, i) {
+  // console.log(dino.species);
+  let gridItem = document.createElement("div");
+  gridItem.className = "grid-item";
+  let species = document.createElement("h3");
+  species.innerHTML = dino.species;
+  let img = document.createElement("img");
+  img.src = `images/${dino.species.toLowerCase()}.png`;
+  let fact = document.createElement("p");
+  fact.innerHTML = dino.fact;
+  gridItem.appendChild(species);
+  gridItem.appendChild(img);
+  gridItem.appendChild(fact);
+  grid.appendChild(gridItem);
+});
 
 // Remove form from screen
 const form = document.getElementById("dino-compare");
