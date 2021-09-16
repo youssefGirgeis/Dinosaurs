@@ -103,22 +103,28 @@ const getHumanData = function () {
     human.diet = document.getElementById("diet").value;
   })(human);
 };
-
+getHumanData();
+console.log(human.diet);
 // Create Dino Compare Method 1
 // NOTE: Weight in JSON file is in lbs, height in inches.
 
+Dino.prototype.compareWeight = function () {};
+
 // Create Dino Compare Method 2
 // NOTE: Weight in JSON file is in lbs, height in inches.
+Dino.prototype.compareHeight = function () {};
 
 // Create Dino Compare Method 3
 // NOTE: Weight in JSON file is in lbs, height in inches.
-
+Dino.prototype.compareDiet = function () {};
 // Generate Tiles for each Dino in Array
 
 // Add tiles to DOM
 
 // Remove form from screen
-
+const form = document.getElementById("dino-compare");
 // On button click, prepare and display infographic
 
-document.querySelector("#btn").addEventListener("click", function () {});
+document.querySelector("#btn").addEventListener("click", function () {
+  form.className = "remove-form";
+});
