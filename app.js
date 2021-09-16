@@ -83,7 +83,26 @@ let pteranodon = new Dino(
 
 // Create Human Object
 
+function Human(name, feet, inches, weight, diet) {
+  this.name = name;
+  this.feet = feet;
+  this.inches = inches;
+  this.weight = weight;
+  this.diet = diet;
+}
+
+const human = new Human();
 // Use IIFE to get human data from form
+
+const getHumanData = function () {
+  return (function (human) {
+    human.name = document.getElementById("name").value;
+    human.feet = document.getElementById("feet").value;
+    human.inches = document.getElementById("inches").value;
+    human.weight = document.getElementById("weight").value;
+    human.diet = document.getElementById("diet").value;
+  })(human);
+};
 
 // Create Dino Compare Method 1
 // NOTE: Weight in JSON file is in lbs, height in inches.
@@ -102,10 +121,4 @@ let pteranodon = new Dino(
 
 // On button click, prepare and display infographic
 
-document.querySelector("#btn").addEventListener("click", function () {
-  const human_name = document.getElementById("name").value;
-  const weight = document.getElementById("weight").value;
-  const feet = document.getElementById("feet").value;
-  const inches = document.getElementById("inches").value;
-  const diet = document.getElementById("diet").value;
-});
+document.querySelector("#btn").addEventListener("click", function () {});
