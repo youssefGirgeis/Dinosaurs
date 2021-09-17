@@ -147,11 +147,12 @@ dinos.forEach(function (dino, i) {
   gridItem.appendChild(fact);
   grid.appendChild(gridItem);
 });
-
+grid.style.display = "none";
 // Remove form from screen
 const form = document.getElementById("dino-compare");
 // On button click, prepare and display infographic
 
 document.querySelector("#btn").addEventListener("click", function () {
   form.className = "remove-form";
+  grid.style.display = "flex";
 });
