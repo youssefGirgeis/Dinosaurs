@@ -81,6 +81,16 @@ let pteranodon = new Dino(
   "Actually a flying reptile, the Pteranodon is not a dinosaur"
 );
 
+const pigeon = new Dino(
+  "Pigeon",
+  0.5,
+  9,
+  "herbavor",
+  "World Wide",
+  "Holocene",
+  "All birds are living dinosaurs."
+);
+
 const dinos = [
   triceratops,
   tyrannosaurusRex,
@@ -89,6 +99,7 @@ const dinos = [
   stegosaurus,
   elasmosaurus,
   pteranodon,
+  pigeon,
 ];
 
 // Create Human Object
@@ -109,7 +120,7 @@ const getHumanData = function () {
     human.name = document.getElementById("name").value;
     human.feet = document.getElementById("feet").value;
     human.inches = document.getElementById("inches").value;
-    human.weight = document.getElementById("weight").value;
+    human.weight = Number(document.getElementById("weight").value);
     human.diet = document.getElementById("diet").value;
   })(human);
 };
@@ -118,22 +129,38 @@ console.log(human.diet);
 // Create Dino Compare Method 1
 // NOTE: Weight in JSON file is in lbs, height in inches.
 
-Dino.prototype.compareWeight = function () {};
+Dino.prototype.compareWeight = function () {
+  return this.weight;
+};
 
 // Create Dino Compare Method 2
 // NOTE: Weight in JSON file is in lbs, height in inches.
-Dino.prototype.compareHeight = function () {};
+Dino.prototype.compareHeight = function () {
+  return this.height;
+};
 
 // Create Dino Compare Method 3
 // NOTE: Weight in JSON file is in lbs, height in inches.
-Dino.prototype.compareDiet = function () {};
+Dino.prototype.compareDiet = function () {
+  return this.diet;
+};
 // Generate Tiles for each Dino in Array
+
+function generateFact(dino) {
+  const facts = [
+    dino.fact,
+    dino.compareDiet(),
+    dino.compareHeight(),
+    dino.compareWeight(),
+  ];
+
+  return facts[Math.floor(Math.random() * facts.length)];
+}
 
 // Add tiles to DOM
 const grid = document.getElementById("grid");
 
 dinos.forEach(function (dino, i) {
-  // console.log(dino.species);
   let gridItem = document.createElement("div");
   gridItem.className = "grid-item";
   let species = document.createElement("h3");
@@ -141,7 +168,7 @@ dinos.forEach(function (dino, i) {
   let img = document.createElement("img");
   img.src = `images/${dino.species.toLowerCase()}.png`;
   let fact = document.createElement("p");
-  fact.innerHTML = dino.fact;
+  fact.innerHTML = generateFact(dino);
   gridItem.appendChild(species);
   gridItem.appendChild(img);
   gridItem.appendChild(fact);
@@ -155,4 +182,5 @@ const form = document.getElementById("dino-compare");
 document.querySelector("#btn").addEventListener("click", function () {
   form.className = "remove-form";
   grid.style.display = "flex";
+  getHumanData();
 });
