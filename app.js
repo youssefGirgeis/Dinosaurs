@@ -178,13 +178,12 @@ const createTiles = function () {
   });
 };
 
-grid.style.display = "none";
 // Remove form from screen
 const form = document.getElementById("dino-compare");
 // On button click, prepare and display infographic
 
 document.querySelector("#btn").addEventListener("click", function () {
-  form.className = "remove-form";
-  grid.style.display = "flex";
   getHumanData();
+  form.className = "remove-form";
+  createTiles();
 });
