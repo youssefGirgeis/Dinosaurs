@@ -129,7 +129,7 @@ console.log(human.diet);
 // Create Dino Compare Method 1
 // NOTE: Weight in JSON file is in lbs, height in inches.
 
-Dino.prototype.compareWeight = function () {
+Dino.prototype.compareWeight = function (human) {
   return this.weight;
 };
 
@@ -149,31 +149,35 @@ Dino.prototype.compareDiet = function () {
 function generateFact(dino) {
   const facts = [
     dino.fact,
-    dino.compareDiet(),
-    dino.compareHeight(),
-    dino.compareWeight(),
+    dino.compareDiet(human),
+    dino.compareHeight(human),
+    dino.compareWeight(human),
   ];
 
   return facts[Math.floor(Math.random() * facts.length)];
 }
 
 // Add tiles to DOM
-const grid = document.getElementById("grid");
 
-dinos.forEach(function (dino, i) {
-  let gridItem = document.createElement("div");
-  gridItem.className = "grid-item";
-  let species = document.createElement("h3");
-  species.innerHTML = dino.species;
-  let img = document.createElement("img");
-  img.src = `images/${dino.species.toLowerCase()}.png`;
-  let fact = document.createElement("p");
-  fact.innerHTML = generateFact(dino);
-  gridItem.appendChild(species);
-  gridItem.appendChild(img);
-  gridItem.appendChild(fact);
-  grid.appendChild(gridItem);
-});
+const createTiles = function () {
+  const grid = document.getElementById("grid");
+
+  dinos.forEach(function (dino, i) {
+    let gridItem = document.createElement("div");
+    gridItem.className = "grid-item";
+    let species = document.createElement("h3");
+    species.innerHTML = dino.species;
+    let img = document.createElement("img");
+    img.src = `images/${dino.species.toLowerCase()}.png`;
+    let fact = document.createElement("p");
+    fact.innerHTML = generateFact(dino);
+    gridItem.appendChild(species);
+    gridItem.appendChild(img);
+    gridItem.appendChild(fact);
+    grid.appendChild(gridItem);
+  });
+};
+
 grid.style.display = "none";
 // Remove form from screen
 const form = document.getElementById("dino-compare");
