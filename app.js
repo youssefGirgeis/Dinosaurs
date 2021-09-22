@@ -142,7 +142,7 @@ Dino.prototype.compareHeight = function () {
 // Create Dino Compare Method 3
 // NOTE: Weight in JSON file is in lbs, height in inches.
 Dino.prototype.compareDiet = function (human) {
-  const dietFact = "";
+  let dietFact = "";
   if (this.diet === "herbavor")
     dietFact = `${this.species} was a ${this.diet}. You are safe, they eat plants only 😎`;
   else if (this.diet === "ominvor")
@@ -160,8 +160,9 @@ function generateFact(dino) {
     dino.compareHeight(human),
     dino.compareWeight(human),
   ];
-
-  return facts[Math.floor(Math.random() * facts.length)];
+  return dino.species === "Pigeon"
+    ? dino.fact
+    : facts[Math.floor(Math.random() * facts.length)];
 }
 
 // Add tiles to DOM
@@ -177,7 +178,7 @@ const createTiles = function () {
     let img = document.createElement("img");
     img.src = `images/${dino.species.toLowerCase()}.png`;
     let fact = document.createElement("p");
-    fact.innerHTML = generateFact(dino);
+    fact.innerHTML = dino instanceof Dino ? generateFact(dino) : "";
     gridItem.appendChild(species);
     gridItem.appendChild(img);
     gridItem.appendChild(fact);
