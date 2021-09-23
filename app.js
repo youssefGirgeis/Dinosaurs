@@ -91,17 +91,6 @@ const pigeon = new Dino(
   "All birds are living dinosaurs."
 );
 
-const dinos = [
-  triceratops,
-  tyrannosaurusRex,
-  anklyosaurus,
-  brachiosaurus,
-  stegosaurus,
-  elasmosaurus,
-  pteranodon,
-  pigeon,
-];
-
 // Create Human Object
 
 function Human(name, feet, inches, weight, diet) {
@@ -125,7 +114,18 @@ const getHumanData = function () {
   })(human);
 };
 getHumanData();
-console.log(human.diet);
+
+const dinos = [
+  triceratops,
+  tyrannosaurusRex,
+  anklyosaurus,
+  brachiosaurus,
+  stegosaurus,
+  elasmosaurus,
+  pteranodon,
+  pigeon,
+  human,
+];
 // Create Dino Compare Method 1
 // NOTE: Weight in JSON file is in lbs, height in inches.
 
@@ -174,9 +174,12 @@ const createTiles = function () {
     let gridItem = document.createElement("div");
     gridItem.className = "grid-item";
     let species = document.createElement("h3");
-    species.innerHTML = dino.species;
+    species.innerHTML = dino instanceof Dino ? dino.species : dino.name;
     let img = document.createElement("img");
-    img.src = `images/${dino.species.toLowerCase()}.png`;
+    img.src =
+      dino instanceof Dino
+        ? `images/${dino.species.toLowerCase()}.png`
+        : `images/human.png`;
     let fact = document.createElement("p");
     fact.innerHTML = dino instanceof Dino ? generateFact(dino) : "";
     gridItem.appendChild(species);
