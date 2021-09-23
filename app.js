@@ -178,6 +178,8 @@ const createTiles = function () {
   dinos.forEach(function (dino, i) {
     let gridItem = document.createElement("div");
     gridItem.className = "grid-item";
+    gridItem.style.order =
+      dino instanceof Dino ? i + 1 : Math.floor(dinos.length / 2);
     let species = document.createElement("h3");
     species.innerHTML = dino instanceof Dino ? dino.species : dino.name;
     let img = document.createElement("img");
