@@ -98,6 +98,7 @@ function Human(name, feet, inches, weight, diet) {
   this.feet = feet;
   this.inches = inches;
   this.weight = weight;
+  this.height = 12 * this.feet + inches;
   this.diet = diet;
 }
 
@@ -108,8 +109,9 @@ const getHumanData = function () {
   return (function (human) {
     human.name = document.getElementById("name").value;
     human.feet = document.getElementById("feet").value;
-    human.inches = document.getElementById("inches").value;
+    human.inches = Number(document.getElementById("inches").value);
     human.weight = Number(document.getElementById("weight").value);
+    human.height = 12 * human.feet + human.inches;
     human.diet = document.getElementById("diet").value;
   })(human);
 };
@@ -135,8 +137,11 @@ Dino.prototype.compareWeight = function (human) {
 
 // Create Dino Compare Method 2
 // NOTE: Weight in JSON file is in lbs, height in inches.
-Dino.prototype.compareHeight = function () {
-  return this.height;
+Dino.prototype.compareHeight = function (human) {
+  if (this.height > human.height)
+    return `${this.species} is ${this.height} inches. It is taller than you`;
+  else
+    return `${this.species} is ${this.height} inches. It is shorter than you`;
 };
 
 // Create Dino Compare Method 3
