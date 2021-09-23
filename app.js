@@ -132,7 +132,9 @@ const dinos = [
 // NOTE: Weight in JSON file is in lbs, height in inches.
 
 Dino.prototype.compareWeight = function (human) {
-  return this.weight;
+  if (this.weight > human.weight)
+    return `${this.species} is heavier than you. There is a chance you can escape`;
+  else return `${this.species} is less in weight than you.`;
 };
 
 // Create Dino Compare Method 2
@@ -179,7 +181,7 @@ const createTiles = function () {
     let gridItem = document.createElement("div");
     gridItem.className = "grid-item";
     gridItem.style.order =
-      dino instanceof Dino ? i + 1 : Math.floor(dinos.length / 2);
+      dino instanceof Dino ? i + 1 : Math.floor(dinos.length / 2); // refactor: create separete function
     let species = document.createElement("h3");
     species.innerHTML = dino instanceof Dino ? dino.species : dino.name;
     let img = document.createElement("img");
