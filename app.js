@@ -80,11 +80,11 @@ Dino.prototype.compareHeight = function (human) {
 Dino.prototype.compareDiet = function (human) {
   let dietFact = "";
   if (this.diet === "herbavor")
-    dietFact = `${this.species} was a ${this.diet}. You are safe, they eat plants only 😎`;
+    dietFact = `${this.species} was a ${this.diet} and you are ${human.diet}. You are safe, they eat plants only 😎`;
   else if (this.diet === "ominvor")
-    dietFact = `${this.species} was a ${this.diet}. They eat plants and animals 😒`;
+    dietFact = `${this.species} was a ${this.diet} and you are ${human.diet}. They eat plants and animals 😒`;
   else
-    dietFact = `${this.species} was a ${this.diet}. Be carful, they eat animals only 😲`;
+    dietFact = `${this.species} was a ${this.diet} and you are ${human.diet}. Be carful, they eat animals only 😲`;
   return dietFact;
 };
 // Generate Tiles for each Dino in Array
