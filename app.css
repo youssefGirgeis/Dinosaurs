@@ -130,10 +130,6 @@ p {
   margin: 0 auto;
 }
 
-.remove-form {
-  display: none;
-}
-
 form p {
   margin-bottom: 0.3em;
   font-size: 1.3em;

@@ -133,6 +133,6 @@ const form = document.getElementById("dino-compare");
 
 document.querySelector("#btn").addEventListener("click", function () {
   getHumanData();
-  form.className = "remove-form";
+  form.style.display = "none";
   createTiles();
 });
