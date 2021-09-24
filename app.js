@@ -32,89 +32,6 @@ fetch("dino.json")
     });
   });
 
-// console.log(dinos);
-// console.log(dinos.length);
-
-// let triceratops = new Dino(
-//   "Triceratops",
-//   13000,
-//   114,
-//   "herbavor",
-//   "North America",
-//   "Late Cretaceous",
-//   "First discovered in 1889 by Othniel Charles Marsh"
-// );
-
-// let tyrannosaurusRex = new Dino(
-//   "Tyrannosaurus Rex",
-//   11905,
-//   144,
-//   "carnivor",
-//   "North America",
-//   "Late Cretaceous",
-//   "The largest known skull measures in at 5 feet long."
-// );
-
-// let anklyosaurus = new Dino(
-//   "Anklyosaurus",
-//   10500,
-//   55,
-//   "herbavor",
-//   "North America",
-//   "Late Cretaceous",
-//   "Anklyosaurus survived for approximately 135 million years."
-// );
-
-// let brachiosaurus = new Dino(
-//   "Brachiosaurus",
-//   7000,
-//   372,
-//   "herbavor",
-//   "North America",
-//   "Late Jurasic",
-//   "An asteroid was named 9954 Brachiosaurus in 1991"
-// );
-
-// let stegosaurus = new Dino(
-//   "Stegosaurus",
-//   11600,
-//   79,
-//   "herbavor",
-//   "North America, Europe, Asia",
-//   "Late Jurasic to Early Cretaceous",
-//   "The Stegosaurus had between 17 and 22 seperate places and flat spines"
-// );
-
-// let elasmosaurus = new Dino(
-//   "Elasmosaurus",
-//   16000,
-//   59,
-//   "carnivor",
-//   "North America",
-//   "Late Cretaceous",
-//   "Elasmosaurus was a marine reptile first discovered in Kansas"
-// );
-
-// let pteranodon = new Dino(
-//   "Pteranodon",
-//   44,
-//   20,
-//   "carnivor",
-//   "North America",
-//   "Late Cretaceous",
-//   "Actually a flying reptile, the Pteranodon is not a dinosaur"
-// );
-
-// const pigeon = new Dino(
-//   "Pigeon",
-//   0.5,
-//   9,
-//   "herbavor",
-//   "World Wide",
-//   "Holocene",
-//   "All birds are living dinosaurs."
-// );
-
 // Create Human Object
 
 function Human(name, feet, inches, weight, diet) {
@@ -139,20 +56,7 @@ const getHumanData = function () {
     human.diet = document.getElementById("diet").value;
   })(human);
 };
-getHumanData();
-dinos.push(human);
 
-// const dinos = [
-//   triceratops,
-//   tyrannosaurusRex,
-//   anklyosaurus,
-//   brachiosaurus,
-//   stegosaurus,
-//   elasmosaurus,
-//   pteranodon,
-//   pigeon,
-//   human,
-// ];
 // Create Dino Compare Method 1
 // NOTE: Weight in JSON file is in lbs, height in inches.
 
@@ -201,6 +105,7 @@ function generateFact(dino) {
 
 const createTiles = function () {
   const grid = document.getElementById("grid");
+  dinos.push(human);
   dinos.forEach(function (dino, i) {
     let gridItem = document.createElement("div");
     gridItem.className = "grid-item";
