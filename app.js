@@ -131,7 +131,15 @@ const createTiles = function () {
 const form = document.getElementById("dino-compare");
 // On button click, prepare and display infographic
 
-document.querySelector("#btn").addEventListener("click", function () {
+// document.querySelector("#btn").addEventListener("click", function (e) {
+//   getHumanData();
+//   form.style.display = "none";
+//   createTiles();
+// });
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  // alert("hello");
   getHumanData();
   form.style.display = "none";
   createTiles();
