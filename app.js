@@ -1,4 +1,5 @@
 let dinos = [];
+let tilesOrder = [];
 
 // Create Dino Constructor
 function Dino(species, weight, height, diet, where, when, fact) {
@@ -109,8 +110,7 @@ const createTiles = function () {
   dinos.forEach(function (dino, i) {
     let gridItem = document.createElement("div");
     gridItem.className = "grid-item";
-    gridItem.style.order =
-      dino instanceof Dino ? i + 1 : Math.floor(dinos.length / 2); // refactor: create separete function
+    gridItem.style.order = randomizeTiles(dino);
     let species = document.createElement("h3");
     species.innerHTML = dino instanceof Dino ? dino.species : dino.name;
     let img = document.createElement("img");
@@ -144,3 +144,18 @@ form.addEventListener("submit", function (e) {
   form.style.display = "none";
   createTiles();
 });
+
+const randomizeTiles = function (dino) {
+  let tileOrder = Math.floor(Math.random() * dinos.length);
+  console.log(tileOrder);
+  if (dino instanceof Dino) {
+    tilesOrder.push(Math.floor(dinos.length / 2));
+    while (tilesOrder.includes(tileOrder)) {
+      tileOrder = Math.floor(Math.random() * dinos.length);
+    }
+    tilesOrder.push(tileOrder);
+    return tileOrder;
+  } else {
+    return Math.floor(dinos.length / 2);
+  }
+};
