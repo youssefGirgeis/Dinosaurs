@@ -125,6 +125,7 @@ const createTiles = function () {
     gridItem.appendChild(fact);
     grid.appendChild(gridItem);
   });
+  paintTiles();
 };
 
 // Remove form from screen
@@ -147,9 +148,9 @@ form.addEventListener("submit", function (e) {
 
 const randomizeTiles = function (dino) {
   let tileOrder = Math.floor(Math.random() * dinos.length);
-  console.log(tileOrder);
+  // console.log(tileOrder);
   if (dino instanceof Dino) {
-    tilesOrder.push(Math.floor(dinos.length / 2));
+    tilesOrder.push(Math.floor(dinos.length / 2)); //refactor here!
     while (tilesOrder.includes(tileOrder)) {
       tileOrder = Math.floor(Math.random() * dinos.length);
     }
@@ -157,5 +158,23 @@ const randomizeTiles = function (dino) {
     return tileOrder;
   } else {
     return Math.floor(dinos.length / 2);
+  }
+};
+
+const paintTiles = () => {
+  const grids = document.querySelectorAll(".grid-item");
+  const colors = [
+    "#009687f5",
+    "#dc7657f5",
+    "#4bb3c1fa",
+    "#fac069f9",
+    "#67a866f9",
+    "#b94169fa",
+    "#7f62b3fa",
+    "#9fc376f9",
+    "#677bcbfa",
+  ];
+  for (const [i, grid] of grids.entries()) {
+    grid.style.background = colors[i];
   }
 };
