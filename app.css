@@ -141,3 +141,7 @@ select {
   display: block;
   font-size: 0.7em;
 }
+
+.invalid {
+  border: 2px solid red;
+}

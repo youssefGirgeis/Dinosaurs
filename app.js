@@ -1,5 +1,9 @@
+// Global Variables
+
 let dinos = [];
 let tilesOrder = [];
+const form = document.getElementById("dino-compare");
+const button = document.querySelector("#btn");
 
 // Create Dino Constructor
 function Dino(species, weight, height, diet, where, when, fact) {
@@ -128,22 +132,18 @@ const createTiles = function () {
   paintTiles();
 };
 
-// Remove form from screen
-const form = document.getElementById("dino-compare");
 // On button click, prepare and display infographic
+const name = document.getElementById("name");
+const feet = document.getElementById("feet");
+const inches = document.getElementById("inches");
+const weight = document.getElementById("weight");
 
-// document.querySelector("#btn").addEventListener("click", function (e) {
-//   getHumanData();
-//   form.style.display = "none";
-//   createTiles();
-// });
-
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
-  // alert("hello");
-  getHumanData();
-  form.style.display = "none";
-  createTiles();
+button.addEventListener("click", function (e) {
+  if (validateForm(name, feet, inches, weight)) {
+    getHumanData();
+    form.style.display = "none";
+    createTiles();
+  }
 });
 
 const randomizeTiles = function (dino) {
@@ -177,4 +177,25 @@ const paintTiles = () => {
   for (const [i, grid] of grids.entries()) {
     grid.style.background = colors[i];
   }
+};
+
+const validateForm = function (...inputs) {
+  let isValid = true;
+  const divError = document.querySelectorAll(".error");
+
+  inputs.forEach((input, i) => {
+    if (input.value === "") {
+      validateInput(input, "red", divError[i], `Please enter ${input.name} 😒`);
+      isValid = false;
+    } else {
+      validateInput(input, "green", divError[i], "", "none");
+    }
+  });
+  return isValid;
+};
+
+const validateInput = function (input, color, divError, msg, display = "") {
+  input.style.border = `2px solid ${color}`;
+  divError.textContent = msg;
+  divError.style.display = display;
 };

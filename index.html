@@ -30,6 +30,7 @@
       <div class="form-container">
         <p>Name:</p>
         <input id="name" class="form-field__full" type="name" name="name" />
+        <div class="error"></div>
         <p>Height</p>
         <label
           >Feet:
@@ -43,6 +44,8 @@
             type="number"
             name="inches"
         /></label>
+        <div class="error"></div>
+        <div class="error"></div>
         <p>Weight:</p>
         <label
           ><input
@@ -50,7 +53,9 @@
             class="form-field__full"
             type="number"
             name="weight"
-          />lbs</label
+          />
+          <div class="error"></div>
+          lbs</label
         >
         <p>Diet:</p>
         <select id="diet" class="form-field__full" name="diet">
@@ -58,8 +63,8 @@
           <option>Omnivor</option>
           <option>Carnivor</option>
         </select>
-        <!-- <div id="btn">Compare Me!</div> -->
-        <input type="submit" value="Compare Me!" id="btn" />
+        <div id="btn">Compare Me!</div>
+        <!-- <input type="submit" value="Compare Me!" id="btn" /> -->
       </div>
     </form>
     <!-- .grid to attach tiles to -->
