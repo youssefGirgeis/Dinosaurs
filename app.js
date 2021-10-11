@@ -185,17 +185,13 @@ const validateForm = function (...inputs) {
 
   inputs.forEach((input, i) => {
     if (input.value === "") {
-      validateInput(input, "red", divError[i], `Please enter ${input.name} 😒`);
+      inputs.style.color = "2px solid red";
+      divError.textContent = `Please enter ${input.name} 😒`;
       isValid = false;
     } else {
-      validateInput(input, "green", divError[i], "", "none");
+      inputs.style.color = "2px solid green";
+      divError.style.display = "none";
     }
   });
   return isValid;
-};
-
-const validateInput = function (input, color, divError, msg, display = "") {
-  input.style.border = `2px solid ${color}`;
-  divError.textContent = msg;
-  divError.style.display = display;
 };
