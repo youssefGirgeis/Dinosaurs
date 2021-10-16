@@ -1,19 +1,26 @@
 // Global Variables
 
+// to hold all nine objects
 let dinos = [];
+// the order of the tiles on the screen: 1 to 9
 let tilesOrder = [];
-const form = document.getElementById("dino-compare");
-const button = document.querySelector("#btn");
-const name = document.getElementById("name");
-const feet = document.getElementById("feet");
-const inches = document.getElementById("inches");
-const weight = document.getElementById("weight");
-const diet = document.getElementById("diet");
+const form = document.getElementById('dino-compare');
+const button = document.querySelector('#btn');
+const name = document.getElementById('name');
+const feet = document.getElementById('feet');
+const inches = document.getElementById('inches');
+const weight = document.getElementById('weight');
+const diet = document.getElementById('diet');
 
 /* 
 Helper Functions
 */
 
+/**
+ * @description generates a radom fact
+ * @param {Dino} dino - A Dino instance
+ * @returns {string} fact - A fact for each dino instance
+ */
 function generateFact(dino) {
   const facts = [
     dino.fact,
@@ -21,63 +28,92 @@ function generateFact(dino) {
     dino.compareHeight(human),
     dino.compareWeight(human),
   ];
-  return dino.species === "Pigeon"
+  return dino.species === 'Pigeon'
     ? dino.fact
     : facts[Math.floor(Math.random() * facts.length)];
 }
 
+/**
+ * @description Displays the tiles in random order
+ * @param {Dino} dino - a Dino instance
+ * @returns {number} - the order of the tile
+ */
 const randomizeTiles = function (dino) {
+  // a random number from 1 to 9
   let tileOrder = Math.floor(Math.random() * dinos.length);
-  // console.log(tileOrder);
   if (dino instanceof Dino) {
-    tilesOrder.push(Math.floor(dinos.length / 2)); //refactor here!
+    // the order of the human tile
+    tilesOrder.push(Math.floor(dinos.length / 2)); // I need to refacto this line!
     while (tilesOrder.includes(tileOrder)) {
+      // generate a new random varible from 1 to 9 if it was generated before
       tileOrder = Math.floor(Math.random() * dinos.length);
     }
+    // add the random number to the tiles order o keep track of the tiles order
     tilesOrder.push(tileOrder);
     return tileOrder;
   } else {
+    // human tile order
     return Math.floor(dinos.length / 2);
   }
 };
 
+/**
+ * @description Adds background color to each grid/tile
+ */
 const paintTiles = () => {
-  const grids = document.querySelectorAll(".grid-item");
+  const grids = document.querySelectorAll('.grid-item');
   const colors = [
-    "#009687f5",
-    "#dc7657f5",
-    "#4bb3c1fa",
-    "#fac069f9",
-    "#67a866f9",
-    "#b94169fa",
-    "#7f62b3fa",
-    "#9fc376f9",
-    "#677bcbfa",
+    '#009687f5',
+    '#dc7657f5',
+    '#4bb3c1fa',
+    '#fac069f9',
+    '#67a866f9',
+    '#b94169fa',
+    '#7f62b3fa',
+    '#9fc376f9',
+    '#677bcbfa',
   ];
+  // trying a new the for of loop
   for (const [i, grid] of grids.entries()) {
     grid.style.background = colors[i];
   }
 };
 
+/**
+ * @description Validates data entered by user
+ * @param  {...any} inputs - forms data
+ * @returns {boolean} isValid - true if the form is good to be submitted
+ */
 const validateForm = function (...inputs) {
   let isValid = true;
-  const divError = document.querySelectorAll(".error");
+  // a div to display error messages
+  const divError = document.querySelectorAll('.error');
 
   inputs.forEach((input, i) => {
-    if (input.value === "") {
-      input.style.border = "2px solid red";
+    if (input.value === '') {
+      input.style.border = '2px solid red';
       divError[i].textContent = `Please enter ${input.name} 😒`;
       isValid = false;
     } else {
-      input.style.border = "2px solid green";
-      divError[i].style.display = "none";
+      input.style.border = '2px solid green';
+      divError[i].style.display = 'none';
     }
   });
   return isValid;
 };
 /* End of Helper functions */
 
-// Create Dino Constructor
+/**
+ * @description Represents a dinasour/dino
+ * @constructor
+ * @param {string} species - dinasour's species
+ * @param {*} weight - dinaosour's weight
+ * @param {*} height - dinasour's height
+ * @param {*} diet - dinasour's type of food they eat
+ * @param {*} where - dinasour's origin
+ * @param {*} when - dinasour's era
+ * @param {*} fact - a fact about the species
+ */
 function Dino(species, weight, height, diet, where, when, fact) {
   this.species = species;
   this.weight = weight;
@@ -89,9 +125,9 @@ function Dino(species, weight, height, diet, where, when, fact) {
 }
 
 // Create Dino Objects
-fetch("dino.json")
-  .then((response) => response.json())
-  .then((data) => {
+fetch('dino.json')
+  .then(response => response.json())
+  .then(data => {
     data.Dinos.map(function (dino, i) {
       dinos.push(
         new Dino(
@@ -108,7 +144,15 @@ fetch("dino.json")
     });
   });
 
-// Create Human Object
+/**
+ *@description Represents a human
+ @constructor
+ * @param {*} name - a person name
+ * @param {*} feet - person's height in feet
+ * @param {*} inches - person's height inches
+ * @param {*} weight - person's weight
+ * @param {*} diet - person's diet
+ */
 function Human(name, feet, inches, weight, diet) {
   this.name = name;
   this.feet = feet;
@@ -119,7 +163,10 @@ function Human(name, feet, inches, weight, diet) {
 }
 const human = new Human();
 
-// Use IIFE to get human data from form
+/**
+ * @description Retrieves human's data from the form
+ * @returns {Human} - a human instance
+ */
 const getHumanData = function () {
   return (function (human) {
     human.name = name.value;
@@ -134,14 +181,22 @@ const getHumanData = function () {
 // Create Dino Compare Method 1
 // NOTE: Weight in JSON file is in lbs, height in inches.
 
+/**
+ * @description Compares a human weight with dinasours
+ * @param {Human} human - human instance
+ * @returns {string} - a weight comaprison fact
+ */
 Dino.prototype.compareWeight = function (human) {
   if (this.weight > human.weight)
     return `${this.species} is heavier than you. There is a chance you can escape`;
   else return `${this.species} is less in weight than you.`;
 };
 
-// Create Dino Compare Method 2
-// NOTE: Weight in JSON file is in lbs, height in inches.
+/**
+ * @description Compares a human height with dinasours
+ * @param {Human} human - human instance
+ * @returns {string} - a height comaprison fact
+ */
 Dino.prototype.compareHeight = function (human) {
   if (this.height > human.height)
     return `${this.species} is ${this.height} inches. It is taller than you`;
@@ -149,36 +204,41 @@ Dino.prototype.compareHeight = function (human) {
     return `${this.species} is ${this.height} inches. It is shorter than you`;
 };
 
-// Create Dino Compare Method 3
-// NOTE: Weight in JSON file is in lbs, height in inches.
+/**
+ * @description Compares a human diet with dinasours
+ * @param {Human} human - human instance
+ * @returns {string} - a diet comaprison fact
+ */
 Dino.prototype.compareDiet = function (human) {
-  let dietFact = "";
-  if (this.diet === "herbavor")
+  let dietFact = '';
+  if (this.diet === 'herbavor')
     dietFact = `${this.species} was a ${this.diet} and you are ${human.diet}. You are safe, they eat plants only 😎`;
-  else if (this.diet === "ominvor")
+  else if (this.diet === 'ominvor')
     dietFact = `${this.species} was a ${this.diet} and you are ${human.diet}. They eat plants and animals 😒`;
   else
     dietFact = `${this.species} was a ${this.diet} and you are ${human.diet}. Be carful, they eat animals only 😲`;
   return dietFact;
 };
 
-// Add tiles to DOM
+/**
+ * @description Creates tiles amd renders them to the page
+ */
 const createTiles = function () {
-  const grid = document.getElementById("grid");
+  const grid = document.getElementById('grid');
   dinos.push(human);
   dinos.forEach(function (dino, i) {
-    let gridItem = document.createElement("div");
-    gridItem.className = "grid-item";
+    let gridItem = document.createElement('div');
+    gridItem.className = 'grid-item';
     gridItem.style.order = randomizeTiles(dino);
-    let species = document.createElement("h3");
+    let species = document.createElement('h3');
     species.innerHTML = dino instanceof Dino ? dino.species : dino.name;
-    let img = document.createElement("img");
+    let img = document.createElement('img');
     img.src =
       dino instanceof Dino
         ? `images/${dino.species.toLowerCase()}.png`
         : `images/human.png`;
-    let fact = document.createElement("p");
-    fact.innerHTML = dino instanceof Dino ? generateFact(dino) : "";
+    let fact = document.createElement('p');
+    fact.innerHTML = dino instanceof Dino ? generateFact(dino) : '';
     gridItem.appendChild(species);
     gridItem.appendChild(img);
     gridItem.appendChild(fact);
@@ -187,12 +247,14 @@ const createTiles = function () {
   paintTiles();
 };
 
-// On button click, prepare and display infographic
+/**
+ * @description Starts the application
+ */
 function start() {
-  button.addEventListener("click", function (e) {
+  button.addEventListener('click', function (e) {
     if (validateForm(name, feet, inches, weight)) {
       getHumanData();
-      form.style.display = "none";
+      form.style.display = 'none';
       createTiles();
     }
   });
