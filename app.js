@@ -128,7 +128,7 @@ function Dino(species, weight, height, diet, where, when, fact) {
 fetch('dino.json')
   .then(response => response.json())
   .then(data => {
-    data.Dinos.map(function (dino, i) {
+    data.Dinos.map(function (dino) {
       dinos.push(
         new Dino(
           dino.species,
@@ -226,7 +226,7 @@ Dino.prototype.compareDiet = function (human) {
 const createTiles = function () {
   const grid = document.getElementById('grid');
   dinos.push(human);
-  dinos.forEach(function (dino, i) {
+  dinos.forEach(function (dino) {
     let gridItem = document.createElement('div');
     gridItem.className = 'grid-item';
     gridItem.style.order = randomizeTiles(dino);
@@ -251,7 +251,7 @@ const createTiles = function () {
  * @description Starts the application
  */
 function start() {
-  button.addEventListener('click', function (e) {
+  button.addEventListener('click', function () {
     if (validateForm(name, feet, inches, weight)) {
       getHumanData();
       form.style.display = 'none';
